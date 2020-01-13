@@ -4,6 +4,8 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 # Install vimrc configuration
 cp .vimrc $HOME/.vimrc
+mkdir -p $HOME/.vim/colors
+mv molokai.vim $HOME/.vim/colors/ 
 
 # Install nice fonts for vim-airline
 sudo apt install -y fonts-powerline
