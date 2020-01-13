@@ -22,30 +22,6 @@ set cursorline
 " Enable mouse for vim
 set mouse=a
 
-" Copy to clibboard
-" set clipboard=unnamedplus
-
-" Paste from the correct place or not (0 register) 
-" nnoremap p "0p
-
-" This stuff is for not copy to the register when pasting with visual
-" I haven't found how to hide this function (yet)
-" function! RestoreRegister()
-"   let @" = s:restore_reg
-"   return ''
-" endfunction
-" 
-" function! s:Repl()
-"     let s:restore_reg = @"
-"     return \"p@=RestoreRegister()\<cr>\"
-" endfunction
-" 
-" \" \"\NB: this supports \"rp that replaces the selection by the contents of @r
-" vnoremap <silent> <expr> p <sid>Repl()
-
-"End of this stuff
-
-
 " ---------------------> Automatic things. <----------------------------------
 " Python template for files .py
 au bufnewfile *.py 0r $HOME/.vim/templates/sentinel.temp
@@ -56,25 +32,25 @@ autocmd BufWritePre *.py %s/\s\+$//e
 " One space before def in classes.
 " autocmd BufWritePre *.py :%s/\([^_]\n\)\(    def\)/\1\r\2/e
 
-autocmd BufWritePre *.py :%s/\([^_]\)\(\n    @.*\n\)\(    def\)/\1\r\2\3/e
+" autocmd BufWritePre *.py :%s/\([^_]\)\(\n    @.*\n\)\(    def\)/\1\r\2\3/e
 
 " 2 spaces before class when there are less than 2
-autocmd BufWritePre *.py :%s/\(.\)\(\n\{1,2\}class\)/\1\r\r\rclass/e
+" autocmd BufWritePre *.py :%s/\(.\)\(\n\{1,2\}class\)/\1\r\r\rclass/e
 
 " 2 spaces before class when there are more than 2
-autocmd BufWritePre *.py :%s/\n\{4,50\}class/\r\r\rclass/e
+" autocmd BufWritePre *.py :%s/\n\{4,50\}class/\r\r\rclass/e
 
 " 1 space before def in classe when 0
-autocmd BufWritePre *.py :%s/\(.\)\(\n    # _\{73\}\)/\1\r\2/e
+" autocmd BufWritePre *.py :%s/\(.\)\(\n    # _\{73\}\)/\1\r\2/e
 
 " Add auto the beatiful commets for python.
-autocmd BufWritePre *.py :%s/\(\n\n\)\(    @.*\n    def.*:\)/\1    # _________________________________________________________________________\r\2/e
-autocmd BufWritePre *.py :%s/\(\n\)\(\n    def .\+):$\)/\r\r    # _________________________________________________________________________\2/e
+" autocmd BufWritePre *.py :%s/\(\n\n\)\(    @.*\n    def.*:\)/\1    # _________________________________________________________________________\r\2/e
+" autocmd BufWritePre *.py :%s/\(\n\)\(\n    def .\+):$\)/\r\r    # _________________________________________________________________________\2/e
 "
 " Keep only 1 empty line between a method and the previous
 " autocmd BufWritePre *.py :%s/\(\n\{3,50\}\)\(    # _\{73\}\)/\r\r\2/e
 "
-autocmd BufWritePre *.py :%s/\(\n\{3,50\}\)\(    def.*:\)/\r\r\2/e
+" autocmd BufWritePre *.py :%s/\(\n\{3,50\}\)\(    def.*:\)/\r\r\2/e
 
 " Delete blank lines at the end of the python documents
 autocmd BufWritePre *.py :v/\_s*\S/d
@@ -135,8 +111,8 @@ filetype plugin indent on    " required
 " Plugins for bundle
 Plugin 'scrooloose/syntastic'
 Plugin 'valloric/youcompleteme'
-" Plugin 'honza/vim-snippets'
-" Plugin 'sirver/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'sirver/ultisnips'
 Plugin 'ervandew/supertab'
 Plugin 'heavenshell/vim-pydocstring'
 Plugin 'reedes/vim-wordy'
@@ -147,6 +123,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-fugitive' 
 Plugin 'ap/vim-css-color'
 Plugin 'AnsiEsc.vim'
+Plugin 'airblade/vim-gitgutter'
 
 " Use Google Docstring Style
 let g:ultisnips_python_style = "google"
@@ -160,6 +137,8 @@ let g:UltiSnipsJumpForwardTrigger      = '<tab>'
 let g:UltiSnipsJumpBackwardTrigger     = '<s-tab>'
 let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
+let g:UltiSnipsSnippetDirectories = ['/home/albert/.vim/mitigaUltiSnips']
+
 
 " Autoclose preview windows from youcompleteme
 let g:ycm_autoclose_preview_window_after_insertion = 1
@@ -188,3 +167,4 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme='luna' 
 let g:airline#extensions#tabline#buffer_nr_show = 1
 
+autocmd BufWritePost * GitGutter
