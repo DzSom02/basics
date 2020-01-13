@@ -3,7 +3,7 @@
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 # Install vimrc configuration
-cp .vimrc $HOME/.vimc
+cp .vimrc $HOME/.vimrc
 
 # Install nice fonts for vim-airline
 sudo apt install -y fonts-powerline
