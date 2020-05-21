@@ -10,7 +10,7 @@ set number
 syntax on
 set t_Co=256
 set termguicolors
-colorscheme molokai
+colorscheme nightfly
 
 " Line Width
 set colorcolumn=80
@@ -109,7 +109,8 @@ filetype plugin indent on    " required
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Plugins for bundle
-Plugin 'scrooloose/syntastic'
+" Plugin 'scrooloose/syntastic'
+Plugin 'dense-analysis/ale'
 Plugin 'valloric/youcompleteme'
 Plugin 'honza/vim-snippets'
 Plugin 'sirver/ultisnips'
@@ -117,7 +118,6 @@ Plugin 'ervandew/supertab'
 Plugin 'heavenshell/vim-pydocstring'
 Plugin 'reedes/vim-wordy'
 Plugin 'vim-scripts/indentpython.vim'
-" Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'  
 Plugin 'tpope/vim-fugitive' 
@@ -137,7 +137,7 @@ let g:UltiSnipsJumpForwardTrigger      = '<tab>'
 let g:UltiSnipsJumpBackwardTrigger     = '<s-tab>'
 let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
-let g:UltiSnipsSnippetDirectories = ['/home/albert/.vim/mitigaUltiSnips']
+let g:UltiSnipsSnippetDirectories = ['/home/albert/.vim/vim-snippets']
 
 
 " Autoclose preview windows from youcompleteme
@@ -148,17 +148,24 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-let g:syntastic_python_checkers = ['flake8']
+" let g:syntastic_python_checkers = ['flake8', 'darling']
 
 " Syntastic plugin configuration
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_mode_map = { 'mode': 'active', 'active_filetypes': [], 'passive_filetypes': []}
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 0
+" let g:syntastic_check_on_wq = 0
+" let g:syntastic_mode_map = { 'mode': 'active', 'active_filetypes': [], 'passive_filetypes': []}
 
-map <F2> :SyntasticCheck <CR>
-map <F3> :SyntasticToggleMode <CR>
+" ALE plugin configuration
+let g:ale_open_list = 1
+let g:ale_echo_cursor = 0
+" let g:ale_lint_on_text_changed = 'never'
+let g:ale_linters = {'python': ['flake8', 'mypy']}
+" let g:ale_linters = {'python': ['flake8']}
+
+map <F2> :AleEnable <CR>
+map <F3> :ALEToggle <CR>
 map <F4> :Pydocstring <CR>
 
 " vim Airline
@@ -166,5 +173,8 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme='luna' 
 let g:airline#extensions#tabline#buffer_nr_show = 1
+
+" Pydocstring configuration
+let g:pydocstring_formatter = 'google'
 
 autocmd BufWritePost * GitGutter
