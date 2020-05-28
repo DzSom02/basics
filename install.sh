@@ -14,5 +14,8 @@ cp templates/* $HOME/.vim/templates
 # Install nice fonts for vim-airline
 sudo apt install -y fonts-powerline
 
+vim +PluginInstall +qall
+
+./compile_youcompleteme.sh
 # NOTE: At this point you should open vim and run PluginInstall then after this
 # you can compile youcompleteme
